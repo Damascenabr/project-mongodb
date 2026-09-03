@@ -1,6 +1,7 @@
 package com.damascena.workshopmongo.services;
 
 import com.damascena.workshopmongo.domain.User;
+import com.damascena.workshopmongo.dto.UserDTO;
 import com.damascena.workshopmongo.repository.UserRepository;
 import com.damascena.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +23,13 @@ public class UserService {
         Optional<User> obj = repo.findById(id);
         return obj.orElseThrow(()->new ObjectNotFoundException("Usuário não encontrado"));
     }
+
+    public User insert(User obj){
+        return repo.save(obj);
+    }
+
+    public User fromDTO(UserDTO objDTO){
+        return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
+    }
+
 }
