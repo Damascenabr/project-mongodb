@@ -21,6 +21,9 @@ public class Post implements Serializable {
 
 
 
+    public Post() {
+    }
+
     public Post (AuthorDTO author){
 
         this.author = author;
