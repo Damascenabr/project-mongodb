@@ -3,12 +3,14 @@ package com.damascena.workshopmongo.config;
 import com.damascena.workshopmongo.domain.Post;
 import com.damascena.workshopmongo.domain.User;
 import com.damascena.workshopmongo.dto.AuthorDTO;
+import com.damascena.workshopmongo.dto.CommentDTO;
 import com.damascena.workshopmongo.repository.PostRepository;
 import com.damascena.workshopmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.TimeZone;
@@ -36,8 +38,15 @@ public class Instantiation implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", " Vou viajar para São Paulo. Abraços", new AuthorDTO(maria));
-        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei Feliz", new AuthorDTO(maria));
+        Post post1 = new Post(null, sdf.parse("21/03/2026"), "Partiu viagem", " Vou viajar para São Paulo. Abraços", new AuthorDTO(maria));
+        Post post2 = new Post(null, sdf.parse("23/03/2026"), "Bom dia", "Acordei Feliz", new AuthorDTO(maria));
+
+        CommentDTO c1 = new CommentDTO("Boa Viagem!", sdf.parse("21/03/2026"), new AuthorDTO(alex));
+        CommentDTO c2 = new CommentDTO("Aproveite", sdf.parse("22/03/2026"), new AuthorDTO(bob));
+        CommentDTO c3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("23/03/2026"), new AuthorDTO(alex));
+
+        post1.getComments().addAll(Arrays.asList(c1, c2));
+        post2.getComments().addAll(Arrays.asList(c3));
 
         postRepository.saveAll(Arrays.asList(post1, post2));
 
