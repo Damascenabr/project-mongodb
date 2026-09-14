@@ -26,4 +26,8 @@ public class PostService {
         return obj.orElseThrow(()->new ObjectNotFoundException("Usuário não encontrado"));
     }
 
+    public List<Post> findByTitle(String text){
+        return repo.findByTitleContainingIgnoreCase(text);
+    }
+
 }
