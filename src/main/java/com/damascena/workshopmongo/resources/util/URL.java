@@ -2,7 +2,10 @@ package com.damascena.workshopmongo.resources.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class URL {
     public static String decodeParam(String text){
@@ -11,5 +14,17 @@ public class URL {
         }catch (UnsupportedEncodingException e){
             return "";
         }
+    }
+
+    public static Date convertDate(String texDate, Date defaultValue) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        try {
+            return sdf.parse(texDate);
+        } catch (ParseException e) {
+            return defaultValue;
+        }
+
+
     }
 }
